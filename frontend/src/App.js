@@ -1,15 +1,13 @@
 import logo from "./logo.svg";
 import "./App.css";
 import TopNavbar from "./components/navbar";
-import ProfileCards from "./components/Card";
-import FeedCards from "./components/feed";
+import UserHomePage from "./components/userHomePage";
 
 function App() {
   return (
     <div className="App">
       <TopNavbar />
-      <ProfileCards />
-      <FeedCards />
+      <UserHomePage />
     </div>
   );
 }
