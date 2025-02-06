@@ -1,6 +1,6 @@
 import React from "react";
 import FeedCards from "./feed";
-import ProfileCards from "./Card";
+import ProfileCards from "./profileCard";
 
 const UserHomePage = () => {
   return (
