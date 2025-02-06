@@ -1,13 +1,15 @@
 import logo from "./logo.svg";
 import "./App.css";
-import BasicExample from "./components/navbar";
+import TopNavbar from "./components/navbar";
 import ProfileCards from "./components/Card";
+import FeedCards from "./components/feed";
 
 function App() {
   return (
     <div className="App">
-      <BasicExample />
+      <TopNavbar />
       <ProfileCards />
+      <FeedCards />
     </div>
   );
 }
