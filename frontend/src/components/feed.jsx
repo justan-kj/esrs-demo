@@ -1,20 +1,28 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { getPosts } from "../api/postApi";
 import Card from "react-bootstrap/Card";
 
 const FeedCards = () => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await getPosts();
+      setPosts(response);
+    };
+    fetchPosts();
+  }, []);
+
   return (
     <div>
-      <Card>
-        {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
-        <Card.Body>
-          <Card.Title>Card Title</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text>
-        </Card.Body>
-      </Card>
+      {posts.map((post) => (
+        <Card className="my-4" key={post.id}>
+          <Card.Body>
+            <Card.Title>{post.userId}</Card.Title>
+            <Card.Text>{post.content}</Card.Text>
+          </Card.Body>
+        </Card>
+      ))}
     </div>
   );
 };
