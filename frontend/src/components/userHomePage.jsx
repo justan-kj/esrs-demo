@@ -4,7 +4,7 @@ import ProfileCards from "./profileCard";
 
 const UserHomePage = () => {
   return (
-    <div className="container">
+    <div className="container my-4">
       <div className="row">
         <div className="col-md-3">
           <ProfileCards />

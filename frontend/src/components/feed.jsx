@@ -16,7 +16,7 @@ const FeedCards = () => {
   return (
     <div>
       {posts.map((post) => (
-        <Card className="my-4" key={post.id}>
+        <Card className="mb-4" key={post.id}>
           <Card.Body>
             <Card.Title>{post.userId}</Card.Title>
             <Card.Text>{post.content}</Card.Text>
