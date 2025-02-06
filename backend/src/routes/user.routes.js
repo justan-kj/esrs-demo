@@ -1,11 +1,17 @@
-app.get("/users/{user_id}", function (req, res) {
-  res.sendFile(path.join(__dirname, "index.html"));
+const express = require("express");
+const users = require("../dummy_data/users");
+
+const router = express.Router();
+
+// Get all users
+router.get("/", (req, res) => res.json(users));
+
+// Get a single user by ID
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  const user = users.find((u) => u.id === Number(id));
+
+  user ? res.json(user) : res.status(404).json({ error: "User not found" });
 });
 
-app.put("/users/{user_id}", function (req, res) {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
-
-app.get("/users/{user_id}/posts", function (req, res) {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
+module.exports = router;
