@@ -18,8 +18,8 @@ const FeedCards = () => {
       {posts.map((post) => (
         <Card className="mb-4" key={post.id}>
           <Card.Body>
-            <Card.Title>{post.userId}</Card.Title>
-            <Card.Text>{post.content}</Card.Text>
+            <Card.Title className="text-start h6">{post.userId}</Card.Title>
+            <Card.Text className="text-start h7 p-3">{post.content}</Card.Text>
           </Card.Body>
         </Card>
       ))}
