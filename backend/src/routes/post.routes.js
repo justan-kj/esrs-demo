@@ -1,44 +1,48 @@
 const express = require("express");
-const posts = require("../dummy_data/posts");
-
 const router = express.Router();
 
 // Get all posts
-router.get("/", (req, res) => res.json(posts));
+router.get("/posts", async (req, res) => {
+  let collection = await db.collection("posts");
+  let results = await collection.find({}).limit(50).toArray();
+  res.send(results).status(200);
+});
 
 // Get a single post
-router.get("/:id", (req, res) => {
-  const { id } = req.params;
-  const post = posts.find((p) => p.id === Number(id));
-
-  post ? res.json(post) : res.status(404).json({ error: "Post not found" });
+router.get("/:id", async (req, res) => {
+  let collection = await db.collection("posts");
+  let query = { _id: ObjectId(req.params.id) };
+  let result = await collection.findOne(query);
+  if (!result) res.send("Not found").status(404);
+  else res.send(result).status(200);
 });
 
 // Create a new post
-router.post("/", (req, res) => {
-  const { userId, content } = req.body;
+router.post("/", async (req, res) => {
+  let collection = await db.collection("posts");
+  let newDocument = req.body;
+  newDocument.date = new Date();
+  let result = await collection.insertOne(newDocument);
+  res.send(result).status(204);
+});
 
-  if (!userId || !content) {
-    return res.status(400).json({ error: "Missing userId or content" });
-  }
-
-  const newPost = { id: posts.length + 1, userId, content };
-  posts.push(newPost);
-
-  res.status(201).json(newPost);
+// Update a new post
+router.patch("/comment/:id", async (req, res) => {
+  const query = { _id: ObjectId(req.params.id) };
+  const updates = {
+    $push: { comments: req.body },
+  };
+  let collection = await db.collection("posts");
+  let result = await collection.updateOne(query, updates);
+  res.send(result).status(200);
 });
 
 // Delete a post
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-  const postIndex = posts.findIndex((p) => p.id === Number(id));
-
-  if (postIndex === -1) {
-    return res.status(404).json({ error: "Post not found" });
-  }
-
-  posts.splice(postIndex, 1);
-  res.status(204).send();
+router.delete("/:id", async (req, res) => {
+  const query = { _id: ObjectId(req.params.id) };
+  const collection = db.collection("posts");
+  let result = await collection.deleteOne(query);
+  res.send(result).status(200);
 });
 
 module.exports = router;
