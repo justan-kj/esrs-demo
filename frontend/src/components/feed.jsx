@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { getPosts } from "../api/postApi";
 import Card from "react-bootstrap/Card";
+import Image from "react-bootstrap/Image";
 
 const FeedCards = () => {
   const [posts, setPosts] = useState([]);
@@ -26,12 +27,27 @@ const FeedCards = () => {
         </div>
       ) : (
         posts.map((post) => (
-          <Card className="mb-4" key={post.id}>
+          <Card className="mb-4 shadow-sm border-0" key={post.id}>
             <Card.Body>
-              <Card.Title className="text-start h6">{post.userId}</Card.Title>
-              <Card.Text className="text-start h7 p-3">
-                {post.content}
-              </Card.Text>
+              <Card.Title className="text-start h6">
+                <div className="mx-0 row">
+                  <Image
+                    style={{ height: "48px", width: "48px" }}
+                    className="p-0"
+                    roundedCircle
+                    fluid
+                    src={
+                      post.icon ||
+                      "https://avatar.oxro.io/avatar.svg?name=" +
+                        post.userId +
+                        "&background=random"
+                    }
+                    alt={post.userId + " Icon"}
+                  ></Image>
+                  <p className="col-md-9">{post.userId}</p>
+                </div>
+              </Card.Title>
+              <Card.Text className="text-start h7">{post.content}</Card.Text>
             </Card.Body>
           </Card>
         ))

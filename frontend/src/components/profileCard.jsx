@@ -1,11 +1,13 @@
 import React from "react";
+import Card from "react-bootstrap/Card";
+
 import "../bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./profileCard.css";
 
 const ProfileCards = () => {
   return (
-    <div className="container">
+    <Card>
       <div className="card profile-card-2">
         <div className="card-img-block">
           <img
@@ -14,31 +16,22 @@ const ProfileCards = () => {
             alt="Card"
           />
         </div>
-        <div className="card-body pt-5">
+        <Card.Body>
           <img
             src="https://randomuser.me/api/portraits/men/79.jpg"
             alt="profile"
             className="profile"
           />
-          <h5 className="card-title">Jack Hunt</h5>
-          <p className="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <div className="icon-block">
-            <a href="#">
-              <i className="fa fa-facebook"></i>
-            </a>
-            <a href="#">
-              <i className="fa fa-twitter"></i>
-            </a>
-            <a href="#">
-              <i className="fa fa-google-plus"></i>
-            </a>
+          <div className="mt-3">
+            <h5>Jack Hunt</h5>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Voluptate laborum non quod.
+            </p>
           </div>
-        </div>
+        </Card.Body>
       </div>
-    </div>
+    </Card>
   );
 };
 

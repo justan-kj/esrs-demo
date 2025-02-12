@@ -37,15 +37,22 @@ const FriendsList = () => {
             <div className="row ">
               <div className="col-md-3 p-0">
                 <Image
-                  style={{ height: "72px", width: "72px" }}
+                  style={{ height: "48px", width: "48px" }}
                   className=""
                   roundedCircle
                   fluid
-                  src={friend.icon}
+                  src={
+                    friend.icons ||
+                    "https://avatar.oxro.io/avatar.svg?name=" +
+                      friend.name +
+                      "&background=random"
+                  }
                   alt={friend.name + " Icon"}
                 ></Image>
               </div>
-              <div className="col text-start p-0 mx-3 ">{friend.name}</div>
+              <div className="col text-start p-0 mx-0 align-middle">
+                {friend.name}
+              </div>
             </div>
           </Card.Body>
         </Card>
