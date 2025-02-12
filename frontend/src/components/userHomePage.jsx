@@ -1,6 +1,7 @@
 import React from "react";
 import FeedCards from "./feed";
 import ProfileCards from "./profileCard";
+import FriendsList from "./friendList";
 
 const UserHomePage = () => {
   return (
@@ -11,6 +12,9 @@ const UserHomePage = () => {
         </div>
         <div className="col-md-6">
           <FeedCards />
+        </div>
+        <div className="col-md-3">
+          <FriendsList />
         </div>
       </div>
     </div>
