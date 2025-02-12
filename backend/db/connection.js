@@ -1,25 +1,11 @@
-const { MongoClient, ServerApiVersion } = require("mongodb");
-require("dotenv").config();
-
-dotenv.config();
-
-const db_password = encodeURIComponent(process.env.DB_PASSWORD);
-const uri = `mongodb+srv://justintantj:${db_password}@cluster0.ha9v2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
-
-const client = new MongoClient(uri);
-
-let db;
-
-async function connectDB() {
-  try {
-    await client.connect();
-    console.log("Connected to MongoDB");
-    db = client.db("sample_training");
-  } catch (error) {
-    console.error("MongoDB connection error:", error);
-  }
+const { MongoClient } = require("mongodb");
+const connectionString = process.env.ATLAS_URI || "";
+const client = new MongoClient(connectionString);
+let conn;
+try {
+  conn = await client.connect();
+} catch (e) {
+  console.error(e);
 }
-
-await connectDB();
-
+let db = conn.db("Cluster0");
 export default db;
