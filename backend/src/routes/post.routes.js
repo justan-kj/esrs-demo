@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // Get all posts
-router.get("/posts", async (req, res) => {
+router.get("/", async (req, res) => {
   let collection = await db.collection("posts");
   let results = await collection.find({}).limit(50).toArray();
   res.send(results).status(200);
