@@ -1,15 +1,16 @@
-const express = require("express");
-const router = express.Router();
+import express from "express";
+const postRouter = express.Router();
+import db from "../db/connection.js";
 
 // Get all posts
-router.get("/", async (req, res) => {
+postRouter.get("/", async (req, res) => {
   let collection = await db.collection("posts");
   let results = await collection.find({}).limit(50).toArray();
   res.send(results).status(200);
 });
 
 // Get a single post
-router.get("/:id", async (req, res) => {
+postRouter.get("/:id", async (req, res) => {
   let collection = await db.collection("posts");
   let query = { _id: ObjectId(req.params.id) };
   let result = await collection.findOne(query);
@@ -18,7 +19,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Create a new post
-router.post("/", async (req, res) => {
+postRouter.post("/", async (req, res) => {
   let collection = await db.collection("posts");
   let newDocument = req.body;
   newDocument.date = new Date();
@@ -27,7 +28,7 @@ router.post("/", async (req, res) => {
 });
 
 // Update a new post
-router.patch("/comment/:id", async (req, res) => {
+postRouter.patch("/comment/:id", async (req, res) => {
   const query = { _id: ObjectId(req.params.id) };
   const updates = {
     $push: { comments: req.body },
@@ -38,11 +39,11 @@ router.patch("/comment/:id", async (req, res) => {
 });
 
 // Delete a post
-router.delete("/:id", async (req, res) => {
+postRouter.delete("/:id", async (req, res) => {
   const query = { _id: ObjectId(req.params.id) };
   const collection = db.collection("posts");
   let result = await collection.deleteOne(query);
   res.send(result).status(200);
 });
 
-module.exports = router;
+export default postRouter;

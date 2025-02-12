@@ -1,5 +1,9 @@
-const app = require("./app");
+import "dotenv/config.js";
+console.log(process.env.ATLAS_URI);
+import app from "./app.js";
+const PORT = process.env.PORT || 5001;
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// start the Express server
+app.listen(PORT, () => {
+  console.log(`Server is running on port: ${PORT}`);
+});
