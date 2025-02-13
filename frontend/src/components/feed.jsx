@@ -27,27 +27,29 @@ const FeedCards = () => {
         </div>
       ) : (
         posts.map((post) => (
-          <Card className="mb-4 shadow-sm border-0" key={post.id}>
-            <Card.Body>
-              <Card.Title className="text-start h6">
-                <div className="mx-0 row">
-                  <Image
-                    style={{ height: "48px", width: "48px" }}
-                    className="p-0"
-                    roundedCircle
-                    fluid
-                    src={
-                      post.icon ||
-                      "https://avatar.oxro.io/avatar.svg?name=" +
-                        post.userId +
-                        "&background=random"
-                    }
-                    alt={post.userId + " Icon"}
-                  ></Image>
-                  <p className="col-md-9">{post.userId}</p>
-                </div>
-              </Card.Title>
-              <Card.Text className="text-start h7">{post.content}</Card.Text>
+          <Card className="mb-4 shadow border-0" key={post.id}>
+            <Card.Title className="">
+              <div className="row m-3 align-items-center text-start">
+                <Image
+                  style={{ height: "48px", width: "48px" }}
+                  className="col-md-3 p-0"
+                  roundedCircle
+                  fluid
+                  src={
+                    post.icon ||
+                    "https://avatar.oxro.io/avatar.svg?name=" +
+                      post.user.name +
+                      "&background=random"
+                  }
+                  alt={post.userId + " Icon"}
+                ></Image>
+                <h5 className="col-md-9">{post.user.name}</h5>
+              </div>
+            </Card.Title>
+            <Card.Body className=" p-4 pt-1">
+              <Card.Text className="text-start fs-6 fw-normal">
+                {post.content}
+              </Card.Text>
             </Card.Body>
           </Card>
         ))
