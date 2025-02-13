@@ -29,7 +29,7 @@ const FeedCards = () => {
         posts.map((post) => (
           <Card className="mb-4 shadow-sm border-0" key={post.id}>
             <Card.Title className="">
-              <div className="row m-3 align-items-center text-start">
+              <div className="row m-3  text-start">
                 <Image
                   style={{ height: "48px", width: "48px" }}
                   className="col-md-3 p-0"
@@ -43,7 +43,14 @@ const FeedCards = () => {
                   }
                   alt={post.userId + " Icon"}
                 ></Image>
-                <h5 className="col-md-9">{post.user.name}</h5>
+                <div className="col-md-9 mx-0">
+                  <h5 className="row p-0 m-0">{post.user.name}</h5>
+                  <h6 className="row p-0 m-0 fw-lighter">
+                    {new Date(post.created_on).toLocaleDateString() +
+                      " " +
+                      new Date(post.created_on).toLocaleTimeString()}
+                  </h6>
+                </div>
               </div>
             </Card.Title>
             <Card.Body className=" p-4 pt-1">
