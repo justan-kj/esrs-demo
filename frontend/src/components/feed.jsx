@@ -27,7 +27,7 @@ const FeedCards = () => {
         </div>
       ) : (
         posts.map((post) => (
-          <Card className="mb-4 shadow border-0" key={post.id}>
+          <Card className="mb-4 shadow-sm border-0" key={post.id}>
             <Card.Title className="">
               <div className="row m-3 align-items-center text-start">
                 <Image

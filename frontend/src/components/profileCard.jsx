@@ -7,7 +7,7 @@ import "./profileCard.css";
 
 const ProfileCards = () => {
   return (
-    <Card>
+    <Card className="shadow-sm border-0">
       <div className="card profile-card-2">
         <div className="card-img-block">
           <img

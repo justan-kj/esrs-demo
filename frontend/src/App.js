@@ -5,7 +5,7 @@ import UserHomePage from "./components/userHomePage";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-light-subtle">
       <TopNavbar />
       <UserHomePage />
     </div>
