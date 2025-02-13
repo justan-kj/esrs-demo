@@ -2,10 +2,24 @@ import express from "express";
 const postRouter = express.Router();
 import db from "../db/connection.js";
 
+const postsUsersJoin = [
+  {
+    $lookup: {
+      from: "users", // The users collection
+      localField: "userId", // Field in posts that references a user
+      foreignField: "_id", // Field in users to match against
+      as: "user", // The output field with the user details
+    },
+  },
+  {
+    $unwind: "$user", // Flattens the userInfo array into a single document
+  },
+];
+
 // Get all posts
 postRouter.get("/", async (req, res) => {
   let collection = await db.collection("posts");
-  let results = await collection.find({}).limit(50).toArray();
+  let results = await collection.aggregate(postsUsersJoin).limit(50).toArray();
   res.send(results).status(200);
 });
 
